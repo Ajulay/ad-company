@@ -36,13 +36,13 @@ public class CompanyDaoImpl implements CompanyDao {
 
     @Override
     public void update(Company company) {
-        TypedQuery<Company> query = buildCriteria(company);
+        TypedQuery<Company> query = buildTypedQuery(company);
         query.executeUpdate();
     }
 
     @Override
     public List<Company> loadByCriteria(Company company) {
-        TypedQuery<Company> query = buildCriteria(company);
+        TypedQuery<Company> query = buildTypedQuery(company);
         return query.getResultList();
     }
 
@@ -56,7 +56,7 @@ public class CompanyDaoImpl implements CompanyDao {
         return adDao.loadCompanyByAd(ad);
     }
 
-    private TypedQuery<Company> buildCriteria(Company company) {
+    private TypedQuery<Company> buildTypedQuery(Company company) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<Company> criteria = builder.createQuery(Company.class);
         Root<Company> root = criteria.from(Company.class);
